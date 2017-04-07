@@ -21,7 +21,7 @@ for x in onlyFile:
 
 fileRegex = re.compile(r'The\.Expanse.\w*', re.I)
 
-#for file in onlyFile:
+# for file in onlyFile:
 #    print(fileRegex.findall(file))    
 
 # Creates list of folders in TV and Movies
@@ -29,5 +29,17 @@ tvnmDir = []
 for folder in os.listdir('/mnt/tvnm'):
     tvnmDir.append(folder)
 
-pprint.pprint(set(tvnmDir) & set(noSpace))
+# Strips extraneous characters for comparison 
+set1 = []
+for a in per2Space:
+    set2.append(a[:5])
+
+set2 = []
+for b in tvnmDir:
+    set1.append(b[:5])
+
+pprint.pprint(set1 + set2)
+
+
+
 
