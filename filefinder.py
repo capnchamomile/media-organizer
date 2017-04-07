@@ -10,19 +10,9 @@ for dirPath, dirNames, fileNames in os.walk("/mnt/nd"):
 
 # Turns periods in filenames to spaces
 per2Space = []
-for x in onlyFile:
+for x in fullPath:
     j = x.replace('.', ' ')
     per2Space.append(j)
-    
-
-# pprint.pprint(onlyFile)
-
-# REGEX TO FIND FILES 
-
-fileRegex = re.compile(r'The\.Expanse.\w*', re.I)
-
-# for file in onlyFile:
-#    print(fileRegex.findall(file))    
 
 # Creates list of folders in TV and Movies
 tvnmDir = []
@@ -32,14 +22,17 @@ for folder in os.listdir('/mnt/tvnm'):
 # Strips extraneous characters for comparison 
 set1 = []
 for a in per2Space:
-    set2.append(a[:5])
+    set1.append(a[:8])
 
 set2 = []
 for b in tvnmDir:
-    set1.append(b[:5])
+    set2.append(b[:8])
 
-pprint.pprint(set1 + set2)
+#pprint.pprint(set1 + set2)
 
+fNd = sorted(set1)
+fTvnm = sorted(set2)
 
-
-
+for c in fNd:
+    if c in fTvnm:
+        print(os.stat(c))
