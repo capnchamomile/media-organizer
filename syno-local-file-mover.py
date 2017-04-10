@@ -6,7 +6,7 @@ import os, re, shutil, pprint
 fullPath = []
 onlyFile = []
 dirPath = ()
-for dirPath, subDirs, fileNames in os.walk("/mnt/nd"):
+for dirPath, subDirs, fileNames in os.walk("/volume1/New Downloads"):
     for e in fileNames:
         if e.startswith('RARBG.txt'):
             os.remove(os.path.join(dirPath, e))
@@ -30,7 +30,7 @@ for x in onlyFile:
 
 # Creates list of folders in TV and Movies
 tvnmDir = []
-for folder in os.listdir('/mnt/tvnm'):    
+for folder in os.listdir('/volume1/TV and Movies'):    
     tvnmDir.append(folder)
 
 # pprint.pprint(per2Space)
@@ -41,34 +41,15 @@ for folder in os.listdir('/mnt/tvnm'):
 for x in per2Space:
     for y in tvnmDir:
         if x[:8] == y[:8]:
-            shutil.copy(os.path.join('/mnt/nd', x.replace(' ', '.')), os.path.join('/mnt/tvnm', y, x.replace(' ', '.')))
-            
+            z = x.replace(' ', '.')
+            a = z.replace('.mkv', '')
+            try:
+                shutil.move(os.path.join('/volume1/New Downloads', a + '[rarbg]', z), os.path.join('/volume1/TV and Movies', y))           
+            except FileNotFoundError:
+                pass
 
-
-
+for d in tvnmDir:
+    if not os.listdir(d):
+        print(d)
     
-'''
-for q in per2Space:
-    if q[:8] == y[:8] for y in tvnmDir: 
-        print(x)
 
-#This isn't going to work    
-
-# Strips extraneous characters for comparison 
-
-for a in per2Space:
-    set1 = []
-    set1.append(a[:8])
-
-
-for b in tvnmDir:
-    set2 = []
-    set2.append(b[:8])
-
-
-
-for c[:8] in fullPath:
-    if c[:8] in tvnmDir:
-        print(os.stat(c))
-
-'''
