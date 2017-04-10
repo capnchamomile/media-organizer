@@ -1,37 +1,63 @@
-import os, re, shutil
+import os, re, shutil, pprint
+
+
 
 # Creates list of .mkv, .mp4, and .avi files in New Downloads
 fullPath = []
 onlyFile = []
 for dirPath, subDirs, fileNames in os.walk("/mnt/nd"):
+    for e in fileNames:
+        if e.startswith('RARBG.txt'):
+            os.remove(os.path.join(dirPath, e))
+        elif e.startswith('RARBG.com.txt'):
+            os.remove(os.path.join(dirPath, e))
+        else:
+            continue
     for fileName in [f for f in fileNames if f.endswith(".mkv") or f.endswith(".avi") or f.endswith(".mp4")]:
-        fullPath.append(os.path.join(dirPath, fileName))
+        #fullPath.append(os.path.join(dirPath, fileName))
         onlyFile.append(fileName)
 
 # Turns periods in filenames to spaces
+per2Space = []
 
-for x in fullPath:
-    per2Space = []
-    j = x.replace('.', ' ')
-    per2Space.append(j)
+for x in onlyFile:
+    if x.count('.') > 2:
+        j = x.replace('.', ' ')
+        per2Space.append(j)
 
 # Creates list of folders in TV and Movies
-
-for folder in os.listdir('/mnt/tvnm'):
-    tvnmDir = []
+tvnmDir = []
+for folder in os.listdir('/mnt/tvnm'):    
     tvnmDir.append(folder)
 
+pprint.pprint(per2Space)
 
+'''
+for x in per2Space:
+    for y in tvnmDir:
+        if x[:8] == y[:8]:
+            shutil.copy(os.path.join('/mnt/nd', x.replace(' ', '.')), os.path.join('/mnt/tvnm', y, x))
+            
+'''
+
+
+    
+'''
+for q in per2Space:
+    if q[:8] == y[:8] for y in tvnmDir: 
+        print(x)
 
 #This isn't going to work    
-'''
+
 # Strips extraneous characters for comparison 
-set1 = []
+
 for a in per2Space:
+    set1 = []
     set1.append(a[:8])
 
-set2 = []
+
 for b in tvnmDir:
+    set2 = []
     set2.append(b[:8])
 
 
