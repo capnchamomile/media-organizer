@@ -1,6 +1,4 @@
-import os, re, shutil, pprint
-
-
+import os, shutil
 
 # Creates list of .mkv, .mp4, and .avi files in New Downloads
 fullPath = []
@@ -8,9 +6,7 @@ onlyFile = []
 dirPath = ()
 for dirPath, subDirs, fileNames in os.walk("/volume1/New Downloads"):
     for e in fileNames:
-        if e.startswith('RARBG.txt'):
-            os.remove(os.path.join(dirPath, e))
-        elif e.startswith('RARBG.com.txt'):
+        if e.endswith('.txt'):
             os.remove(os.path.join(dirPath, e))
         elif e.endswith('.nfo'):
             os.remove(os.path.join(dirPath, e))
@@ -44,12 +40,25 @@ for x in per2Space:
             z = x.replace(' ', '.')
             a = z.replace('.mkv', '')
             try:
-                shutil.move(os.path.join('/volume1/New Downloads', a + '[rarbg]', z), os.path.join('/volume1/TV and Movies', y))           
-            except FileNotFoundError:
+                e = os.path.join('/volume1/New Downloads', a, z)
+                shutil.move(e, os.path.join('/volume1/TV and Movies', y))
+            except(FileNotFoundError, shutil.Error):
+                pass
+            try:
+                b = os.path.join('/volume1/New Downloads', a + '[rarbg]', z)
+                shutil.move(b, os.path.join('/volume1/TV and Movies', y))            
+            except(FileNotFoundError, shutil.Error):
+                pass
+            try:
+                d = os.path.join('/volume1/New Downloads', a + '[ettv]', z)
+                shutil.move(d, os.path.join('/volume1/TV and Movies', y))             
+            except(FileNotFoundError, shutil.Error):
                 pass
 
-for d in tvnmDir:
-    if not os.listdir(d):
-        print(d)
-    
+# Delete Empty folders (this doesn't work yet)
+      
+for mt in os.listdir('/volume1/New Downloads'):
+    if os.path.isdir(mt) == True:
+        if not os.listdir(mt):
+            os.rmdir(os.path.join('/volume1/New Downloads' + mt))
 
