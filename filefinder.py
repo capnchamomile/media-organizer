@@ -5,11 +5,14 @@ import os, re, shutil, pprint
 # Creates list of .mkv, .mp4, and .avi files in New Downloads
 fullPath = []
 onlyFile = []
+dirPath = ()
 for dirPath, subDirs, fileNames in os.walk("/mnt/nd"):
     for e in fileNames:
         if e.startswith('RARBG.txt'):
             os.remove(os.path.join(dirPath, e))
         elif e.startswith('RARBG.com.txt'):
+            os.remove(os.path.join(dirPath, e))
+        elif e.endswith('.nfo'):
             os.remove(os.path.join(dirPath, e))
         else:
             continue
@@ -30,15 +33,17 @@ tvnmDir = []
 for folder in os.listdir('/mnt/tvnm'):    
     tvnmDir.append(folder)
 
-pprint.pprint(per2Space)
+# pprint.pprint(per2Space)
 
-'''
+
+# Moves files to matching folder name
+
 for x in per2Space:
     for y in tvnmDir:
         if x[:8] == y[:8]:
-            shutil.copy(os.path.join('/mnt/nd', x.replace(' ', '.')), os.path.join('/mnt/tvnm', y, x))
+            print(os.path.join('/mnt/nd', x.replace(' ', '.')), os.path.join('/mnt/tvnm', y, x.replace(' ', '.')))
             
-'''
+
 
 
     
