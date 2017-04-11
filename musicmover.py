@@ -23,18 +23,15 @@ muDir = list(set(sDir))
 
 
 # Match music folders in New Downloads to folders in Music library
+# THIS DON'T WORK
 
 Af = re.compile(r'^[0-9A-Fa-f]{1}')
-Go = re.compile(r'^[0-9G-Og-o]{1}')
-Pz = re.compile(r'^[0-9P-Zp-z]{1}')
+Go = re.compile(r'^[G-Og-o]{1}')
+Pz = re.compile(r'^[P-Zp-z]{1}')
 
 for g in muDir:
-    if Af.findall(g):
-        print(g)
-    elif Go.findall(g):
-        print(g)
-    elif Pz.findall(g):
-        print(g)
+    h = g.replace('/mnt/nd/', '')
+    print(h)
 
 
 
