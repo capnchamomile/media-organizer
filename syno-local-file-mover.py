@@ -3,7 +3,7 @@ import os, shutil
 # Creates list of .mkv, .mp4, and .avi files in New Downloads
 fullPath = []
 onlyFile = []
-dirPath = ()
+
 for dirPath, subDirs, fileNames in os.walk("/volume1/New Downloads"):
     for e in fileNames:
         if e.endswith('.txt'):
@@ -55,10 +55,12 @@ for x in per2Space:
             except(FileNotFoundError, shutil.Error):
                 pass
 
+            
 # Delete Empty folders (this doesn't work yet)
       
-for mt in os.listdir('/volume1/New Downloads'):
+for l in os.listdir('/volume1/New Downloads'):
+    mt = os.path.join('/volume1/New Downloads/' + l)
     if os.path.isdir(mt) == True:
         if not os.listdir(mt):
-            os.rmdir(os.path.join('/volume1/New Downloads' + mt))
+            os.rmdir(mt)
 
