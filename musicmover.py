@@ -3,6 +3,7 @@ import os, pprint, re
 
 # Identify folders containing music files
 Dirs = []
+
 nD = os.listdir('/mnt/nd')
 for a in nD:
     b = os.path.join('/mnt/nd/' + a)
@@ -25,14 +26,21 @@ muDir = list(set(sDir))
 # Match music folders in New Downloads to folders in Music library
 # THIS DON'T WORK
 
-Af = re.compile(r'^[0-9A-Fa-f]{1}')
-Go = re.compile(r'^[G-Og-o]{1}')
-Pz = re.compile(r'^[P-Zp-z]{1}')
+#Af = re.compile(r'^[0-9A-Fa-f]{1}')
+#Go = re.compile(r'^[G-Og-o]{1}')
+#Pz = re.compile(r'^[P-Zp-z]{1}')
 
 for g in muDir:
     h = g.replace('/mnt/nd/', '')
-    print(h)
 
-
-
-# 
+#Creates list of folders in Music
+artDir = []
+for x in os.listdir('/mnt/mu'):
+    for y in os.listdir(os.path.join('/mnt/mu/' + x)):
+        artDir.append(y)  
+ 
+for j in muDir:
+    for l in artDir:
+        if j[:8] == l[:8]:
+            print(l)
+            
